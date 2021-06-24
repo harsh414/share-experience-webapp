@@ -3,17 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>Experiences</title>
-
-        <!-- Fonts -->
+        <meta name="csrf-token" content="{{ csrf_token() }}"
+        <title></title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-        <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-        <!-- Scripts -->
+        <livewire:styles/>
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans bg-gray-background text-gray-900 text-sm" x-data="{top:true}">
@@ -25,15 +20,18 @@
                 @if (Route::has('login'))
                     <div class="px-6 py-4 sm:block">
                         @auth
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                            <div class="flex justify-between space-x-6">
+                                <div>{{auth()->user()->name}}</div>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
 
-                                <a href="{{route('logout')}}"
-                                                       onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </a>
-                            </form>
+                                    <a href="{{route('logout')}}"
+                                                           onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                            </div>
                         @else
                             <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
@@ -50,9 +48,9 @@
         </header>
 
         <main class="container max-w-custom mx-auto pt-36 sm:pt-36 md:pt-24 flex flex-col sm:flex-col md:flex-row">
-            <div class="container mx-auto sm:mx-auto md:mr-5 ml-36 md:ml-0 md:w-70 text-center mr-5 flex flex-col">
-                <div style="border: 1px solid black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem corporis cum dolores, harum hic id in iste iure modi, perspiciatis quaerat vero. Aperiam, excepturi hic magni nesciunt nulla tempore tenetur!</div>
-                <div class="mt-8 sm:mt-8 md:mt-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem corporis cum dolores, harum hic id in iste iure modi, perspiciatis quaerat vero. Aperiam, excepturi hic magni nesciunt nulla tempore tenetur!</div>
+            <div class="container mx-auto sm:mx-auto md:mr-5 ml-48 md:ml-0 w-80 sm:w-80 md:w-80 text-center mr-5 flex flex-col">
+                <livewire:experience-form-interview/>
+                <livewire:ask-a-question/>
             </div>
             <div class="w-175 mt-8 sm:mt-8 md:mt-0">
                 <nav class="flex flex-col sm:flex-col md:flex-row items-center justify-between text-xs sm:pt-4 md:pt-0">
@@ -71,5 +69,6 @@
                 </div>
             </div>
         </main>
+    <livewire:scripts/>
     </body>
 </html>
