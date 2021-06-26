@@ -1,8 +1,7 @@
-@extends('layouts.app')
-@section('content')
+<div>
     <div class="filters flex flex-col md:flex-row space-x-10">
         <div class="md:w-1/3">
-            <select name="category" id="category" onchange="location = this.value;" class="w-full text-sm rounded-xl px-3 py-2 border-none">
+            <select name="category" wire:model="SelectedCategory" id="category" class="w-full text-sm rounded-xl px-3 py-2 border-none">
                 <option value="All experiences">All experiences</option>
                 <option value="Interview Experiences">Interview experiences</option>
                 <option value="Intership Experiences">Internship experiences</option>
@@ -21,25 +20,7 @@
         @foreach($experiences as $exp)
             <div class="experience-container flex flex-col-reverse sm:flex-col-reverse md:flex-row bg-white rounded-xl">
                 <!--     |votes| |profile| |all other information|     flex flow   -->
-                @if(auth()->user())
-                    <livewire:like-update :experience="$exp"/>
-                @else
-                    <div class="border-r border-gray-100 px-5 py-4 sm:py-4 md:py-12 text-center"> <!-- votes container-->
-                        <div class="text-center sm:text-2xl md:text-3xl font-extrabold">
-                            {{$exp->num_likes($exp)->count()}}
-                        </div>
-                        <div class="text-center text-xs">
-                            LIKES
-                        </div>
-                        <div class="mt-3 sm:mt-3 md:mt-8">
-                            <a href="{{route('login')}}">
-                                <button class="text-center bg-gray-200 px-5 py-2 focus:outline-none rounded-xl font-semibold">
-                                    Like
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                @endif
+                <livewire:like-update :experience="$exp"/>
 
                 <div class="profile-container border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
                     <div>
@@ -58,7 +39,7 @@
                         <div class="flex justify-between px-2  text-xs border-b border-gray-100">
                             <div class="font-semibold">
                                 Category:
-                                <span class="font-normal"> Interview Experience</span>
+                                <span class="font-normal">{{$exp->category}}</span>
                             </div>
                             <div class="font-semibold ml-8 sm:ml-8 md:ml-28">
                                 Company:
@@ -96,7 +77,7 @@
                                     <ul @click.away="toggleOpen=!toggleOpen" class="absolute text-left space-y-2 pl-2 ml-12 w-36 sm:w-36 md:w-44 shadow-lg bg-white rounded-xl py-2" x-show="toggleOpen">
                                         <li>
                                             <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">
-                                            Mark as Inappropriate
+                                                Mark as Inappropriate
                                             </a>
                                         </li>
                                         <li>
@@ -113,4 +94,4 @@
             </div>
         @endforeach
     </div>
-@endsection
+</div>

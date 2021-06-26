@@ -55,7 +55,7 @@
             <div class="w-175 mt-8 sm:mt-8 md:mt-0">
                 <nav class="flex flex-col sm:flex-col md:flex-row items-center justify-between text-xs sm:pt-4 md:pt-0">
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10">
-                        <li><a href="" class="border-b-4 pb-3 border-blue">All Shares</a></li>
+                        <li><a href="{{route('home')}}" class="border-b-4 pb-3 border-blue">All Shares</a></li>
                         <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My shared experiences</a></li>
                         <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">Recently asked</a></li>
                     </ul>
