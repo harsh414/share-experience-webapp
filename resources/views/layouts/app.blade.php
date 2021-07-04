@@ -12,7 +12,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans bg-gray-background text-gray-900 text-sm" x-data="{top:true}">
-        <header class="fixed  md:bg-gray-300 z-50 flex flex-col top-0 left-0 right-0 md:flex-row items-center text-white justify-between px-8 py-1"
+        <header class="fixed bg-gray-500 sm:bg-gray-500 z-50 flex flex-col top-0 left-0 right-0 md:flex-row items-center text-white justify-between px-8 py-1"
                         :class="{'bg-black sm:bg-black md:bg-black lg:bg-black ': !top}"
                         @scroll.window="top= (window.pageYOffset)>30 ? false : true">
             <a href="#">Logo goes here</a>
@@ -24,7 +24,6 @@
                                 <div>{{auth()->user()->name}}</div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <a href="{{route('logout')}}"
                                                            onclick="event.preventDefault();
                                             this.closest('form').submit();">
@@ -56,7 +55,7 @@
                 <nav class="flex flex-col sm:flex-col md:flex-row items-center justify-between text-xs sm:pt-4 md:pt-0">
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10">
                         <li><a href="{{route('home')}}" class="border-b-4 pb-3 border-blue">All Shares</a></li>
-                        <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My shared experiences</a></li>
+                        <li><a href="asd" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My shared experiences</a></li>
                         <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">Recently asked</a></li>
                     </ul>
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10 sm:pt-4 md:pt-0 mt-4 sm:mt-4 md:mt-0">
@@ -71,4 +70,5 @@
         </main>
     <livewire:scripts/>
     </body>
+    @yield('scripts')
 </html>

@@ -1,4 +1,4 @@
-<div class="border-r border-gray-100 px-5 py-4 sm:py-4 md:py-12 text-center"> <!-- votes container-->
+<div class="border-r border-gray-100 px-5 py-4 sm:py-4 md:py-12 text-center bg-gray-200"> <!-- votes container-->
     <div class="text-center sm:text-2xl md:text-3xl font-extrabold">
         {{$experience->num_likes($experience)->count()}}
     </div>
@@ -11,7 +11,7 @@
                 Liked
             </button>
         @else
-            <button wire:click="likeUpdate" class="text-center bg-gray-200 px-5 py-2 focus:outline-none rounded-xl font-semibold">
+            <button wire:click="likeUpdate" class="text-center border border-gray-300 bg-gray-200 px-5 py-2 focus:outline-none rounded-xl font-semibold">
                 Like
             </button>
         @endif

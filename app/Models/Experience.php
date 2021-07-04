@@ -13,10 +13,6 @@ class Experience extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function experience_belongs_to() {
-        return $this->belongsTo(User::class);
-    }
-
     public function likes() {
         return $this->hasMany(Like::class);
     }
@@ -40,5 +36,10 @@ class Experience extends Model
         return !!$exp->likes()->where('user_id', $user->id)
             ->where('isliked', true)->count();
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

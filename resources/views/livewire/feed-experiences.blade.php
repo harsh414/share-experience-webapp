@@ -1,7 +1,7 @@
 <div>
     <div class="filters flex flex-col md:flex-row space-x-10">
         <div class="md:w-1/3">
-            <select name="category" wire:model="SelectedCategory" id="category" class="w-full text-sm rounded-xl px-3 py-2 border-none">
+            <select name="category" id="category" class="w-full text-sm rounded-xl px-3 py-2 border-none">
                 <option value="All experiences">All experiences</option>
                 <option value="Interview Experiences">Interview experiences</option>
                 <option value="Intership Experiences">Internship experiences</option>
