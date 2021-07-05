@@ -33,4 +33,20 @@ class IndexPageController extends Controller
             'experience'=>$experience
         ]);
     }
+
+    public function myExperiences() {
+        return view('my-experiences');
+    }
+
+    public function deleteExperience($id) {
+        $to_delete = Experience::find($id);
+        if($to_delete){
+//            $destroy= Experience::destroy($id);
+            return back()->with('removal_success','Removed Successfully');
+        }
+    }
+
+    public function recentlyAsked() {
+
+    }
 }

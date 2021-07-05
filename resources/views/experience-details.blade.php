@@ -26,11 +26,22 @@
                         <div class="text-gray-900">{{$experience->comments()->count()}} Comments</div>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button class="relative bg-gray-100 hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in py-2 px-3">
+                        <button class="relative bg-gray-100 focus:outline-none rounded-full h-7 px-2 py-0.5 ml-3" x-data="{toggleOpen:false}"
+                                @click="toggleOpen = !toggleOpen">
                             <svg fill="currentColor" width="24" height="6"><path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)"></svg>
-                            <ul class="hidden absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8">
-                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark as Spam</a></li>
-                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Post</a></li>
+                            <ul @click.away="toggleOpen=false" class="absolute text-left space-y-2 pl-2 ml-12 w-36 sm:w-36 md:w-44 shadow-lg bg-white rounded-xl py-2" x-show="toggleOpen">
+                                <li>
+                                    <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">
+                                        Mark as Inappropriate
+                                    </a>
+                                </li>
+                                @if(auth() && auth()->user()->id === $experience->user->id)
+                                    <li>
+                                        <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">
+                                            Delete Experience  <!--if it belongs to auth user -->
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </button>
                     </div>
@@ -46,19 +57,7 @@
                     <span class="ml-1">Comment</span>
                 </button>
             </div>
-
-            <div class="flex items-center space-x-3">
-                <div class="bg-white font-semibold text-center rounded-xl px-3 py-2">
-                    <div class="text-xl leading-snug">12</div>
-                    <div class="text-gray-400 text-xs leading-none">Likes</div>
-                </div>
-                <button
-                    type="button"
-                    class="w-32 h-11 text-xs bg-gray-200 font-semibold uppercase rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3"
-                >
-                    <span>Like</span>
-                </button>
-            </div>
+            <livewire:details-page-like-update :experience="$experience"/>
         </div> <!-- end buttons-container -->
 
         <livewire:new-comment :experience="$experience" :wire:key="$experience->id"/> <!--livewire for adding new comment and rendering comment block-->

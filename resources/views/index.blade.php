@@ -15,7 +15,7 @@
                         @endif
                         @foreach($categories as $category)
                             @if($category != $categoryChanged)
-                            <option value="{{$category}}">{{$category}}</option>
+                                <option value="{{$category}}">{{$category}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -23,7 +23,17 @@
             </div>
         <livewire:search-dropdown/>
     </div> <!--filters ends -->
-    <div class="experiences-container my-6 space-y-6">
+    <div class="experiences-container my-6 space-y-6" x-data="{flashMessage:true}">
+        @if(session()->has('removal_success'))
+            <div class="bg-indigo-900 text-center py-2 lg:px-4 mb-4" x-show="flashMessage">
+                <div class="p-1 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                    <span class="font-semibold mr-2 text-left flex-auto">{{session()->get('removal_success')}}</span>
+                    <svg @click="flashMessage=false" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+        @endif
         @foreach($experiences as $exp)
             <div class="experience-container flex flex-col-reverse sm:flex-col-reverse md:flex-row bg-white rounded-xl">
                 <!--     |votes| |profile| |all other information|     flex flow   -->
@@ -52,7 +62,7 @@
                         <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
                     </div>
                     <div class="text-center font-semibold text-xs mt-2">
-                        Harsh agarwal
+                        {{$exp->user->name}}
                     </div>
                     <div class="mt-2 sm:mt-2 text-center md:mt-4 text-xs md:w-28">
                         SE at infosys,intern at idealVillage
@@ -83,7 +93,7 @@
                         </div>
 
                         <div class="flex items-center justify-start px-4 md:mt-6 ml-4">
-                            <div class="text-gray-500 text-xs space-x-2">10 hours ago</div>
+                            <div class="text-gray-500 text-xs space-x-2">{{$exp->created_at->diffForHumans()}}</div>
                             <div class="bg-gray-300 h-2 w-2 rounded-full ml-1"></div>
                             <div class="text-gray-500 text-xs space-x-2 ml-1">{{$exp->comments()->count()}} comments</div>
                             <div class="flex ml-52 sm:ml-52 md:ml-28">
@@ -102,11 +112,14 @@
                                             </a>
                                         </li>
                                         @if(auth() && auth()->user()->id === $exp->user->id)
-                                            <li>
-                                                <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">
-                                                    Delete Experience  <!--if it belongs to auth user -->
-                                                </a>
-                                            </li>
+                                            <form action="{{route('delete-experience',$exp->id)}}" method="POST">
+                                                {{@csrf_field()}}
+                                                <li>
+                                                    <a class="bg-white hover:bg-gray-200 block transition duration-150 ease-in" onclick="$(this).closest('form').submit();">
+                                                        Delete Experience  <!--if it belongs to auth user -->
+                                                    </a>
+                                                </li>
+                                            </form>
                                         @endif
                                     </ul>
                                 </button>

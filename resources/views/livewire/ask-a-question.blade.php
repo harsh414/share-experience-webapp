@@ -7,9 +7,9 @@
         <p class="text-xs mt-4">Ask for a review or an experience before joining at a place :)</p>
         <form action="#" method="POST" class="px-3 py-6">
             <div>
-                <select name="category_add_question" id="category_add_question" class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
-                    <option value="Interview Experience">Interview Experience</option>
-                    <option value="Internship Experience">Internship Experience</option>
+                <select name="category_add" id="category_add" class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
+                    <option value="Interview-Experience">Interview-Experience</option>
+                    <option value="Internship-Experience">Internship-Experience</option>
                 </select>
             </div>
             <div>
