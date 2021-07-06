@@ -49,7 +49,7 @@
                         </div>
                         <div class="mt-3 sm:mt-3 md:mt-8">
                             <a href="{{route('login')}}">
-                                <button class="text-center bg-gray-200 px-5 py-2 focus:outline-none rounded-xl font-semibold">
+                                <button class="text-center border border-gray-300  px-5 py-2 focus:outline-none rounded-xl font-semibold">
                                     Like
                                 </button>
                             </a>
@@ -111,7 +111,7 @@
                                             Mark as Inappropriate
                                             </a>
                                         </li>
-                                        @if(auth() && auth()->user()->id === $exp->user->id)
+                                        @if(auth()->user() && auth()->user()->id === $exp->user->id)
                                             <form action="{{route('delete-experience',$exp->id)}}" method="POST">
                                                 {{@csrf_field()}}
                                                 <li>

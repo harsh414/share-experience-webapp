@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\Models\Experience;
+use App\Models\Question;
+use App\Traits\ExperienceTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class IndexPageController extends Controller
 {
+    use ExperienceTrait; //contains fns for show delete experiences
     public function index() {
         $experiences= Experience::orderBy('created_at','DESC')->get();
         return view('index',[
@@ -27,26 +30,18 @@ class IndexPageController extends Controller
         ]);
     }
 
-    public function show($id) {
-        $experience= Experience::findOrFail($id);
-        return view('experience-details',[
-            'experience'=>$experience
+    public function recentlyAsked() {
+        $questions = Question::orderBy('created_at','DESC')->get();
+        return view('recently-asked',[
+            'questions'=>$questions,
         ]);
     }
 
-    public function myExperiences() {
-        return view('my-experiences');
+    public function showQuestion($id) {
+        $question= Question::findOrFail($id);
+        return view('question-description',[
+            'question'=>$question,
+        ]);
     }
 
-    public function deleteExperience($id) {
-        $to_delete = Experience::find($id);
-        if($to_delete){
-//            $destroy= Experience::destroy($id);
-            return back()->with('removal_success','Removed Successfully');
-        }
-    }
-
-    public function recentlyAsked() {
-
-    }
 }

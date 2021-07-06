@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <h3 class="font-semibold text-base">Add Experience</h3>
+        <h3 class="font-semibold text-base">Add New Experience</h3>
         <p class="text-xs mt-4">Share your experiences with others ! Help them grow </p>
         <form action="{{route('add-new-experience')}}" method="POST" class="px-3 py-6">
             {{@csrf_field()}}

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AddNewController extends Controller
 {
@@ -23,4 +25,24 @@ class AddNewController extends Controller
             return back()->with('success','Thanks for sharing your experience');
         }
     }
+
+    public function askQuestion(Request $request) {
+        $request->validate([
+            'company_name'=>'required',
+            'question'=>'required | min:30',
+        ]);
+
+
+        $q =  new Question();
+        $q->user_id= auth()->user()->id;
+        $q->description= $request->input('question');
+        $q->company_name=$request->input('company_name');
+        $q->category=$request->input('category_add');
+        if($q->save()){
+            return back()->with('question_success','We posted your question !!🎉');
+        }else{
+            return back()->with('failure','fields error');
+        }
+    }
+
 }

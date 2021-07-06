@@ -16,6 +16,9 @@ class NewComment extends Component
     }
 
     public function addComment() {
+        if($this->comment_text==''){
+            return;
+        }
         $new_comment= new Comment();
         $new_comment->experience_id= $this->experience->id;
         $new_comment->user_id= Auth::id();

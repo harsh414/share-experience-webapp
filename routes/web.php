@@ -10,6 +10,7 @@ Route::post('/addExperience','App\Http\Controllers\AddNewController@storeExp')->
 Route::get('/my-shared-experiences','App\Http\Controllers\IndexPageController@myExperiences')->name('my-experiences');
 Route::post('/experiences/delete/{id}','App\Http\Controllers\IndexPageController@deleteExperience')->name('delete-experience');
 
+Route::post('/ask-question','App\Http\Controllers\AddNewController@askQuestion')->name('ask-question');
 Route::get('/recently-asked','App\Http\Controllers\IndexPageController@recentlyAsked')->name('recently-asked');
-//Route::post('/my-shared-experiences/delete/{id}','App\Http\Controllers\IndexPageController@deleteExperience')->name('delete-experience');
+Route::get('/recently-asked/{id}','App\Http\Controllers\IndexPageController@showQuestion')->name('question-details');
 require __DIR__.'/auth.php';

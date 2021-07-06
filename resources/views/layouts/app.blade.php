@@ -60,7 +60,7 @@
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10" id="tabs">
                         <li><a href="{{route('home')}}" id="my-shares" class="border-b-4 pb-3 border-blue transition duration-150 ease-in hover:border-blue">All Shares</a></li>
                         <li><a href="{{route('my-experiences')}}" id="my-exp" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My shared experiences</a></li>
-                        <li><a href="{{route('recently-asked')}}" id="my-questions" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">Recently asked</a></li>
+                        <li><a href="{{route('recently-asked')}}" id="my-questions" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">Recent experiences Request</a></li>
                     </ul>
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10 sm:pt-4 md:pt-0 mt-4 sm:mt-4 md:mt-0">
                         <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My Involvements</a></li>
@@ -88,12 +88,11 @@
                 $("#my-shares").removeClass('border-blue');
                 $("#my-questions").removeClass('border-blue');
                 $("#my-exp").addClass('border-blue');
-            }else if (curr_tab=="my-questions"){
+            }else if (curr_tab=="recently-asked"){
                 $("#my-shares").removeClass('border-blue');
                 $("#my-questions").addClass('border-blue');
                 $("#my-exp").removeClass('border-blue');
             }
-
         })
     </script>
     @yield('scripts')
