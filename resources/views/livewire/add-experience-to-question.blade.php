@@ -46,7 +46,7 @@
                     </div>
             </div>
         </div>
-        <div class="font-bold text-lg text-gray-500 mt-3 px-3 py-2 text-right">Replies to this question</div>
+        <div class="font-bold text-2xl shadow sm:bg-blend-hard-light text-gray-500 mt-3 px-3 py-2 text-center">Replies to this question</div>
         @foreach($question->experiences()->latest()->get() as $exp)
             <div class="experience-container flex flex-col-reverse mt-8 sm:flex-col-reverse md:flex-row bg-white rounded-xl">
                 <!--     |votes| |profile| |all other information|     flex flow   -->

@@ -3,7 +3,7 @@
     <div class="experiences-container my-6 space-y-6" x-data="{flashMessage:true}">
         @foreach($questions as $q)
             <div class="experience-container flex flex-col-reverse sm:flex-col-reverse md:flex-row bg-white rounded-xl">
-                <div class="profile-container bg-gray-100 border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
+                <div class="profile-container bg-gray-300 border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
                     <div class="font-extrabold text-sm pb-2">Author</div>
                     <div>
                         <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div class="description py-2 pl-1 pr-3">
+                <div class="description py-2 pl-1 pr-3 w-full bg-gray-100">
                     <div class="flex-col">
                         <div class="flex justify-between px-2  text-xs border-b border-gray-100">
                             <div class="font-semibold">
