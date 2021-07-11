@@ -23,7 +23,7 @@
             </div>
         <livewire:search-dropdown/>
     </div> <!--filters ends -->
-    <div class="experiences-container my-6 space-y-6" x-data="{flashMessage:true}">
+    <div class="experiences-container my-6 space-y-10" x-data="{flashMessage:true}">
         @if(session()->has('removal_success'))
             <div class="bg-indigo-900 text-center py-2 lg:px-4 mb-4" x-show="flashMessage">
                 <div class="p-1 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
@@ -124,7 +124,7 @@
                                     </a>
                                     <button class="relative bg-gray-100 focus:outline-none rounded-full h-7 px-2 py-0.5 ml-3" x-data="{toggleOpen:false}"
                                             @click="toggleOpen = !toggleOpen">
-                                        <svg fill="currentColor" width="24" height="6"><path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)"></svg>
+                                        <svg fill="currentColor" width="24" height="6"><path fill="#73767a" d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)"></svg>
                                         <ul @click.away="toggleOpen=false" class="absolute text-left space-y-2 pl-2 ml-12 w-36 sm:w-36 md:w-44 shadow-lg bg-white rounded-xl py-2" x-show="toggleOpen">
                                             <li>
                                                 <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">

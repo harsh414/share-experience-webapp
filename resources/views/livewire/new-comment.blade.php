@@ -23,7 +23,7 @@
                     <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" class="w-10 h-10 rounded-full">
                 </a>
                 <div class="content">
-                    <a class="author">Elliot Fu</a>
+                    <a href="" class="author">{{$comment->user->name}}</a>
                     <div class="metadata">
                         <span class="date">{{$comment->created_at->diffForHumans()}}</span>
                     </div>

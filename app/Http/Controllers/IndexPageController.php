@@ -5,7 +5,9 @@ use App\Models\Experience;
 use App\Models\Question;
 use App\Traits\ExperienceTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class IndexPageController extends Controller
 {
@@ -43,5 +45,61 @@ class IndexPageController extends Controller
             'question'=>$question,
         ]);
     }
+
+    public function myInvolvements(Request $request) {
+        $category = ($request->input('category'));
+        if($category == 'Your-asked-questions') {
+            $returned = Question::where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+            $choosen="questions";
+        }else if($category == 'Your-likes'){
+            $returned= DB::table('experiences as exp')
+                ->join('likes as l','exp.id','=','l.experience_id')
+                ->where([
+                    ['exp.user_id','=',auth()->user()->id],
+                    ['l.isliked','=',true],
+                ])
+                ->get();
+            $choosen="likes";
+        }else if($category == 'Other-involvements'){
+        }
+//        dump($returned);
+        return view('my-involvements',[
+//            'returned'=>$returned,
+//            'choosen'=>$choosen
+        ]);
+    }
+
+    public function myProfile() {
+        return view('profile');
+    }
+
+    public function updateProfile(Request $request){
+        $user= auth()->user();
+        $skills= $request->input('skill');
+        if($request->hasFile('file')) {
+            $image = $request->file('file');
+            $path = $image->store('profileimages', 's3');
+            $url = Storage::disk('s3')->url($path);
+            $user->img_url = $url;
+        }else{
+            $url= $user->img_url;
+        }
+
+        $user->skills= $skills;
+        if($user->update()){
+            $data= array(
+                'skills'=>$skills,
+                'msg'=>'Profile Updated Successfully',
+            );
+            return $data;
+        }else{
+            $data= array(
+                'skills'=>$skills,
+                'msg'=>'Failed to update profile',
+                'image_url'=>$url,
+            );
+        }
+    }
+
 
 }

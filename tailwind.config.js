@@ -29,6 +29,9 @@ module.exports = {
                 70 : '17.5rem',
                 175 : '43.75rem'
             },
+            height:{
+                imageHeight: '37rem',
+            },
             maxWidth:{
                 custom : '68.5rem',
             },

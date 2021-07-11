@@ -6844,6 +6844,10 @@ select {
   height: 100vh;
 }
 
+.h-imageHeight {
+  height: 37rem;
+}
+
 .max-h-0 {
   max-height: 0px;
 }
@@ -31323,6 +31327,10 @@ select {
     height: 100vh;
   }
 
+  .sm\:h-imageHeight {
+    height: 37rem;
+  }
+
   .sm\:max-h-0 {
     max-height: 0px;
   }
@@ -55662,6 +55670,10 @@ select {
 
   .md\:h-screen {
     height: 100vh;
+  }
+
+  .md\:h-imageHeight {
+    height: 37rem;
   }
 
   .md\:max-h-0 {
@@ -80005,6 +80017,10 @@ select {
     height: 100vh;
   }
 
+  .lg\:h-imageHeight {
+    height: 37rem;
+  }
+
   .lg\:max-h-0 {
     max-height: 0px;
   }
@@ -104346,6 +104362,10 @@ select {
     height: 100vh;
   }
 
+  .xl\:h-imageHeight {
+    height: 37rem;
+  }
+
   .xl\:max-h-0 {
     max-height: 0px;
   }
@@ -128685,6 +128705,10 @@ select {
 
   .\32xl\:h-screen {
     height: 100vh;
+  }
+
+  .\32xl\:h-imageHeight {
+    height: 37rem;
   }
 
   .\32xl\:max-h-0 {

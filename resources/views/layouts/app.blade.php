@@ -19,7 +19,10 @@
         <header class="fixed bg-gray-500 sm:bg-gray-500 z-50 flex flex-col top-0 left-0 right-0 md:flex-row items-center text-white justify-between px-8 py-1"
                         :class="{'bg-black sm:bg-black md:bg-black lg:bg-black ': !top}"
                         @scroll.window="top= (window.pageYOffset)>30 ? false : true">
-            <a href="#">Logo goes here</a>
+            <a href="{{route('home')}}" class="flex items-center justify-between space-x-2 hover:text-gray-200" style="text-decoration: none">
+                <img src="https://res.cloudinary.com/dkerurdbc/image/upload/v1626028809/Free_Sample_By_Wix_2_vos1qi.jpg" class="h-12 w-12 rounded-full" alt="">
+                <div class="pl-4 text-lg">ShareAndGrow</div>
+            </a>
             <div class="flex items-center justify-between">
                 @if (Route::has('login'))
                     <div class="px-6 py-4 sm:block">
@@ -28,7 +31,7 @@
                                 <div>{{auth()->user()->name}}</div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="{{route('logout')}}"
+                                    <a href="{{route('logout')}}" style="text-decoration: none" class="hover:text-white"
                                                            onclick="event.preventDefault();
                                             this.closest('form').submit();">
                                         {{ __('Log Out') }}
@@ -36,16 +39,18 @@
                                 </form>
                             </div>
                         @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                            <a href="{{ route('login') }}" style="text-decoration: none" class="hover:text-white">Log in</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                                <a href="{{ route('register') }}" style="text-decoration: none" class="ml-4 hover:text-white">Register</a>
                             @endif
                         @endauth
                     </div>
                 @endif
-                <a href="#">
-                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 rounded-full">
+                <a href="{{route('my-profile')}}">
+                    @if(auth()->user())
+                    <img src="{{auth()->user()->img_url}}" alt="avatar" class="w-10 h-10 rounded-full">
+                    @endif
                 </a>
             </div>
         </header>
@@ -63,7 +68,7 @@
                         <li><a href="{{route('recently-asked')}}" id="my-questions" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">Recent experiences Request</a></li>
                     </ul>
                     <ul class="flex uppercase font-bold border-b-4 pb-3 space-x-10 sm:pt-4 md:pt-0 mt-4 sm:mt-4 md:mt-0">
-                        <li><a href="" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My Involvements</a></li>
+                        <li><a href="{{route('my-involvements')}}" id="my-involvements" class="text-gray-400 border-b-4 pb-3 transition duration-150 ease-in hover:border-blue">My Involvements</a></li>
                     </ul>
                 </nav>
 
@@ -84,14 +89,22 @@
                 $("#my-shares").addClass('border-blue');
                 $("#my-questions").removeClass('border-blue');
                 $("#my-exp").removeClass('border-blue');
+                $("#my-involvements").removeClass('border-blue');
             }else if (curr_tab=="my-shared-experiences"){
                 $("#my-shares").removeClass('border-blue');
                 $("#my-questions").removeClass('border-blue');
                 $("#my-exp").addClass('border-blue');
+                $("#my-involvements").removeClass('border-blue');
             }else if (curr_tab=="recently-asked"){
                 $("#my-shares").removeClass('border-blue');
                 $("#my-questions").addClass('border-blue');
                 $("#my-exp").removeClass('border-blue');
+                $("#my-involvements").removeClass('border-blue');
+            }else if (curr_tab=="my-involvements"){
+                $("#my-shares").removeClass('border-blue');
+                $("#my-involvements").addClass('border-blue');
+                $("#my-exp").removeClass('border-blue');
+                $("#my-questions").removeClass('border-blue');
             }
         })
     </script>

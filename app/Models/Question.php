@@ -17,4 +17,9 @@ class Question extends Model
         return $this->hasMany(Experience::class);
     }
 
+    public function ifSharedForThisQuestion(Question $question) {
+        return !!$question->experiences()->where('user_id',auth()->user()->id)
+            ->count();
+    }
+
 }
