@@ -3,14 +3,19 @@
     <div class="experiences-container my-6 space-y-6" x-data="{flashMessage:true}">
         @foreach($questions as $q)
             <div>
+                <div class="bg- py-1 border text-sm flex items-center justify-between px-2" style="background-color: #b3ffe0">
+                    <div><span class="font-bold">Asked for:</span> {{$q->category}}</div>
+                    @if($q->experiences()->count())
+                        <button class="px-2 bg-gray-400 rounded-lg px-4 py-1 text-xs font-semibold focus:outline-none">
+                            <span class="font-extrabold">{{$q->experiences()->count()}}</span> Responses </button>
+                    @else
+                        <button class="px-2 rounded-lg px-4 py-1 text-xs font-semibold focus:outline-none" style="background:#a3a375">
+                            <span class="font-extrabold">{{$q->experiences()->count()}}</span> Responses </button>
+                    @endif
+                </div>
                 @if($q->ifSharedForThisQuestion($q))
-                    <div class="bg- py-1 border text-sm flex items-center justify-between px-2" style="background-color: #b3ffe0">
-                        <div>
-                            <span class="font-bold">Asked for:</span> {{$q->category}}
-                        </div>
-                    </div>
                     <div class="description px-4 py-2" style="background-color: #80ffcc">
-                        You shared Your experience for this question
+                        You shared your experience for this question
                     </div>
                 @endif
                 <div class="experience-container flex flex-col-reverse sm:flex-col-reverse md:flex-row bg-white rounded-xl">

@@ -3,18 +3,16 @@
     <div class="filters flex flex-col md:flex-row space-x-10">
             <div class="md:w-1/3">
                 <?php
-                $categories= array('All-Experiences','Interview-Experience','Internship-Experience');
+                $categories= array('Interview-Experience','Internship-Experience','All-Experiences');
                 ?>
                 <form action="" method="POST">
                     {{ csrf_field() }}
                     <select name="category" onchange="this.form.submit()" id="category" class="w-full text-sm rounded-xl px-3 py-2 border-none">
-                        @if(isset($categoryChanged))
-                            <option value="{{$categoryChanged}}">{{$categoryChanged}}</option>
-                        @else
-                            <?php $categoryChanged=null; ?>
+                        @if($choosen!=NULL)
+                            <option value="{{$choosen}}">{{$choosen}}</option>
                         @endif
                         @foreach($categories as $category)
-                            @if($category != $categoryChanged)
+                            @if($category != $choosen)
                                 <option value="{{$category}}">{{$category}}</option>
                             @endif
                         @endforeach

@@ -15,7 +15,8 @@ class IndexPageController extends Controller
     public function index() {
         $experiences= Experience::orderBy('created_at','DESC')->get();
         return view('index',[
-            'experiences'=>$experiences
+            'experiences'=>$experiences,
+            'choosen'=>NULL
         ]);
     }
 
@@ -28,7 +29,7 @@ class IndexPageController extends Controller
         }
         return view('index',[
             'experiences'=>$experiences,
-            'categoryChanged'=>$category
+            'choosen'=>$category
         ]);
     }
 
@@ -46,11 +47,20 @@ class IndexPageController extends Controller
         ]);
     }
 
-    public function myInvolvements(Request $request) {
+
+    public function initialResults(){
+        $returned= Question::where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('my-involvements',[
+            'returned'=>$returned,
+            'choosen'=>NULL,
+        ]);
+    }
+    public function myInvolvements(Request $request) { //getting post req to change dropdown
         $category = ($request->input('category'));
+        $choosen= $category;
+        $returned=NULL;
         if($category == 'Your-asked-questions') {
             $returned = Question::where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-            $choosen="questions";
         }else if($category == 'Your-likes'){
             $returned= DB::table('experiences as exp')
                 ->join('likes as l','exp.id','=','l.experience_id')
@@ -59,13 +69,13 @@ class IndexPageController extends Controller
                     ['l.isliked','=',true],
                 ])
                 ->get();
-            $choosen="likes";
         }else if($category == 'Other-involvements'){
+
         }
 //        dump($returned);
         return view('my-involvements',[
-//            'returned'=>$returned,
-//            'choosen'=>$choosen
+            'returned'=>$returned,
+            'choosen'=>$choosen
         ]);
     }
 
