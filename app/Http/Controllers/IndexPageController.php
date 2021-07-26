@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Experience;
+use App\Models\Like;
 use App\Models\Question;
 use App\Traits\ExperienceTrait;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class IndexPageController extends Controller
 {
+    //*********ALL SHARES ****************
     use ExperienceTrait; //contains fns for show delete experiences
     public function index() {
         $experiences= Experience::orderBy('created_at','DESC')->get();
@@ -32,7 +34,9 @@ class IndexPageController extends Controller
             'choosen'=>$category
         ]);
     }
+    // ***************ALL SHARES ENDS ********************
 
+    //**************QUESTIONS PART************************
     public function recentlyAsked() {
         $questions = Question::orderBy('created_at','DESC')->get();
         return view('recently-asked',[
@@ -47,7 +51,18 @@ class IndexPageController extends Controller
         ]);
     }
 
+    public function removeQuestion($id){
+        $question= Question::findOrFail($id);
+        if($question){
+            Question::destroy($id);
+            return back()->with('removal_success_question','Question withdrawed');
+        }else{
+            return back()->with('removal_success_question','Try later');
+        }
+    }
+    //**********QUESTION PART ENDS **********
 
+    // ********MY INVOLVEMENTS BEGINS********
     public function initialResults(){
         $returned= Question::where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
         return view('my-involvements',[
@@ -60,25 +75,24 @@ class IndexPageController extends Controller
         $choosen= $category;
         $returned=NULL;
         if($category == 'Your-asked-questions') {
-            $returned = Question::where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+            $returned = Question::where('user_id', '=', auth()->user()->id)->get();
         }else if($category == 'Your-likes'){
-            $returned= DB::table('experiences as exp')
-                ->join('likes as l','exp.id','=','l.experience_id')
-                ->where([
-                    ['exp.user_id','=',auth()->user()->id],
-                    ['l.isliked','=',true],
-                ])
-                ->get();
-        }else if($category == 'Other-involvements'){
-
+            $user_id= Auth::id();
+            $q= Like::where(['user_id'=>$user_id,'isliked'=>true])->get()->toArray();
+            $exp_array=[];
+            foreach ($q as $like){
+                array_push($exp_array,$like['experience_id']);
+            }
+            $returned= Experience::whereIn('id',$exp_array)->get();
         }
-//        dump($returned);
         return view('my-involvements',[
             'returned'=>$returned,
             'choosen'=>$choosen
         ]);
     }
+    // ******MY INVOLVEMENTS ENDS*********
 
+    //**********Profile BEGINS******************
     public function myProfile() {
         return view('profile');
     }
@@ -94,7 +108,6 @@ class IndexPageController extends Controller
         }else{
             $url= $user->img_url;
         }
-
         $user->skills= $skills;
         if($user->update()){
             $data= array(
@@ -110,6 +123,7 @@ class IndexPageController extends Controller
             );
         }
     }
+    //******PROFILE ENDS********
 
 
 }

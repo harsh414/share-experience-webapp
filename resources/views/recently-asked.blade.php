@@ -22,7 +22,7 @@
                     <div class="profile-container bg-gray-300 border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
                         <div class="font-extrabold text-sm pb-2">Author</div>
                         <div>
-                            <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
+                            <img src="{{$q->user->img_url}}" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
                         </div>
                         <div class="text-center font-semibold text-xs mt-2">
                             {{$q->user->name}}
@@ -60,22 +60,6 @@
                                             Open
                                         </button>
                                     </a>
-                                    @if(auth()->user()  && $q->user->id == auth()->user()->id)
-                                        <button class="relative bg-gray-100 focus:outline-none rounded-full h-7 px-2 py-0.5 ml-3" x-data="{toggleOpen:false}"
-                                                @click="toggleOpen = !toggleOpen">
-                                            <svg fill="currentColor" width="24" height="6"><path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)"></svg>
-                                            <ul @click.away="toggleOpen=false" class="absolute text-left space-y-2 pl-2 ml-12 w-36 sm:w-36 md:w-44 shadow-lg bg-white rounded-xl py-2" x-show="toggleOpen">
-                                                <form action="" method="POST">
-                                                    {{@csrf_field()}}
-                                                    <li>
-                                                        <a class="bg-white hover:bg-gray-200 block transition duration-150 ease-in" onclick="$(this).closest('form').submit();">
-                                                            Remove Question  <!--if it belongs to auth user -->
-                                                        </a>
-                                                    </li>
-                                                </form>
-                                            </ul>
-                                        </button>
-                                    @endif
                                 </div>
                             </div>
                         </div>

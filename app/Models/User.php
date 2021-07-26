@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany(Experience::class);
     }
 
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
     public function questions() {
         return $this->hasMany(Question::class);
     }

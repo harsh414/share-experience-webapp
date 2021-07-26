@@ -33,7 +33,7 @@
             </div>
         @endif
         @foreach($experiences as $exp)
-            <div>
+            <div class="border-red border-b-2 border-r-2">
                 @if($exp->was_asked && $exp->question_id)
                     <div class="bg-gray-400 py-1 text-sm flex items-center justify-between px-2">
                         <div>
@@ -56,6 +56,7 @@
                 <div class="experience-container flex flex-col-reverse sm:flex-col-reverse md:flex-row bg-white rounded-xl">
                     <!--     |votes| |profile| |all other information|     flex flow   -->
                     @if(auth()->user())
+
                         <livewire:like-update :experience="$exp"/>
                     @else
                         <div class="border-r border-gray-100 px-5 py-4 sm:py-4 md:py-12 text-center bg-gray-200"> <!-- votes container-->
@@ -77,7 +78,7 @@
 
                     <div class="profile-container bg-gray-100 border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
                         <div>
-                            <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
+                            <img src="{{$exp->user->img_url}}" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
                         </div>
                         <div class="text-center font-semibold text-xs mt-2">
                             {{$exp->user->name}}

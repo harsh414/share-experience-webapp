@@ -14,8 +14,11 @@ Route::post('/ask-question','App\Http\Controllers\AddNewController@askQuestion')
 Route::get('/recently-asked','App\Http\Controllers\IndexPageController@recentlyAsked')->name('recently-asked')->middleware('auth');
 Route::get('/recently-asked/{id}','App\Http\Controllers\IndexPageController@showQuestion')->name('question-details');
 
-Route::get('/my-involvements','App\Http\Controllers\IndexPageController@initialResults')->name('my-involvements');
-Route::post('/my-involvements','App\Http\Controllers\IndexPageController@myInvolvements')->name('categoryMyInvolvement');
+Route::group(['middleware'=>'auth'],function (){
+    Route::get('/my-involvements','App\Http\Controllers\IndexPageController@initialResults')->name('my-involvements');
+    Route::post('/my-involvements','App\Http\Controllers\IndexPageController@myInvolvements')->name('categoryMyInvolvement');
+    Route::post('/my-involvements/questionRemove/{id}','App\Http\Controllers\IndexPageController@removeQuestion')->name('removeQuestion');
+});
 
 Route::get('/profile','App\Http\Controllers\IndexPageController@myProfile')->middleware('auth')->name('my-profile');
 Route::post('/profile','App\Http\Controllers\IndexPageController@updateProfile')->name('my-profile-update');

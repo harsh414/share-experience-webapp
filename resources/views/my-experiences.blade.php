@@ -53,7 +53,7 @@
 
                 <div class="profile-container bg-gray-100 border-r text-center border-gray-100 px-2 py-5"> <!-- profile container-->
                     <div>
-                        <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
+                        <img src="{{$exp->user->img_url}}" alt="avatar" class="w-10 h-10 mx-auto rounded-full">
                     </div>
                     <div class="text-center font-semibold text-xs mt-2">
                         Harsh agarwal
