@@ -54,7 +54,8 @@ return [
     |
     */
 
-    'asset_url' => 'http://localhost/experiences/public',
+//    'asset_url' => 'http://localhost/experiences/public',  //local
+    'asset_url' => 'https://experiences-shareandgrow.herokuapp.com/',
 
     /*
     |--------------------------------------------------------------------------
