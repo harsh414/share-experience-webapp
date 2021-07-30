@@ -18,7 +18,7 @@
     <body class="font-sans bg-gray-background text-gray-900 text-sm" x-data="{top:true}">
         <header class="fixed bg-gray-500 sm:bg-gray-500 z-50 flex flex-col top-0 left-0 right-0 md:flex-row items-center text-white justify-between px-8 py-1"
                         :class="{'bg-black sm:bg-black md:bg-black lg:bg-black ': !top}"
-                        @scroll.window="top= (window.pageYOffset)>30 ? false : true">
+                        @scroll.window="top= (window.pageYOffset)>20 ? false : true">
             <a href="{{route('home')}}" class="flex items-center justify-between space-x-2 hover:text-gray-200" style="text-decoration: none">
                 <img src="https://res.cloudinary.com/dkerurdbc/image/upload/v1626028809/Free_Sample_By_Wix_2_vos1qi.jpg" class="h-12 w-12 rounded-full" alt="">
                 <div class="pl-4 text-lg">ShareAndGrow</div>

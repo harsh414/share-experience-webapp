@@ -125,5 +125,16 @@ class IndexPageController extends Controller
     }
     //******PROFILE ENDS********
 
+    public function markAsInappropriate($exp_id) {
+        $user= Auth::user();
+        $exp = Experience::findOrFail($exp_id);
+        if($exp->ifMarkedWrongBy($user)){
+            $exp->mark_as($user,false);
+        }else{
+            $exp->mark_as($user,true);
+        }
+        return redirect()->back();
+    }
+
 
 }

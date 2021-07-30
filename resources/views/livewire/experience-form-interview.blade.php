@@ -30,7 +30,7 @@
         <form action="{{route('add-new-experience')}}" method="POST" class="px-3 py-6">
             {{@csrf_field()}}
             <div>
-                <select name="category_add" id="category_add" class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
+                <select name="category_add" wire:model="category" id="category_add" class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
                     <option value="Interview-Experience">Interview-Experience</option>
                     <option value="Internship-Experience">Internship-Experience</option>
                 </select>

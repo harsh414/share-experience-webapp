@@ -39,4 +39,13 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
+    public function InAppExperiences(){ //InApp means Inappropriate
+        return $this->hasMany(Inappropriate::class);
+    }
+
+    public function ifMarkedAsInappropriate($experince_id) {
+        return !! $this->InAppExperiences()
+            ->where(['experience_id'=>$experince_id,'inappropriate'=>true])->count();
+    }
+
 }

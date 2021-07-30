@@ -28,6 +28,24 @@ class Experience extends Model
         );
     }
 
+    public function markedWrong() {
+        return $this->hasMany(Inappropriate::class);
+    }
+
+    public function mark_as($user = null,  $liked = true){
+        $this->markedWrong()->updateOrCreate(
+            [
+                'user_id' => $user ? $user->id : auth()->id,
+            ],[
+                'inappropriate' => $liked,
+            ]
+        );
+    }
+
+    public function ifMarkedWrongBy($user) {
+        return !! $this->markedWrong()->where(['user_id'=>$user->id,'inappropriate'=>true])->count();
+    }
+
     public function num_likes($exp) {
         return $exp->likes()->where('isliked',true);
     }

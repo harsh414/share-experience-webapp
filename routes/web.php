@@ -20,6 +20,8 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('/my-involvements/questionRemove/{id}','App\Http\Controllers\IndexPageController@removeQuestion')->name('removeQuestion');
 });
 
+Route::post('/mark-as-inappropriate/{id}','App\Http\Controllers\IndexPageController@markAsInappropriate')->name('mark-as-inappropriate');
+
 Route::get('/profile','App\Http\Controllers\IndexPageController@myProfile')->middleware('auth')->name('my-profile');
 Route::post('/profile','App\Http\Controllers\IndexPageController@updateProfile')->name('my-profile-update');
 require __DIR__.'/auth.php';

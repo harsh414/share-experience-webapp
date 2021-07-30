@@ -33,7 +33,12 @@
             </div>
         @endif
         @foreach($experiences as $exp)
-            <div class="border-red border-b-2 border-r-2">
+            @if(auth()->user() && auth()->user()->ifMarkedAsInappropriate($exp->id))
+            <div class="border border-red" style="filter: blur(1px);-webkit-filter: blur(1px);">
+                <div class="text-center font-bold" style="background:#e6b3cc">Marked as Inappropriate</div>
+            @else
+            <div>
+            @endif
                 @if($exp->was_asked && $exp->question_id)
                     <div class="bg-gray-400 py-1 text-sm flex items-center justify-between px-2">
                         <div>
@@ -84,7 +89,12 @@
                             {{$exp->user->name}}
                         </div>
                         <div class="mt-2 sm:mt-2 text-center md:mt-4 text-xs md:w-28">
-                            SE at infosys,intern at idealVillage
+                             <?php
+                                $skills = explode(',',$exp->user->skills);
+                             ?>
+                            @foreach($skills as $skill)
+                                {{$skill}} @if(!$loop->last) {{'| '}} @endif
+                             @endforeach
                         </div>
                     </div>
 
@@ -125,11 +135,16 @@
                                             @click="toggleOpen = !toggleOpen">
                                         <svg fill="currentColor" width="24" height="6"><path fill="#73767a" d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)"></svg>
                                         <ul @click.away="toggleOpen=false" class="absolute text-left space-y-2 pl-2 ml-12 w-36 sm:w-36 md:w-44 shadow-lg bg-white rounded-xl py-2" x-show="toggleOpen">
-                                            <li>
-                                                <a href="#" class="bg-white hover:bg-gray-200 block transition duration-150 ease-in">
-                                                Mark as Inappropriate
-                                                </a>
-                                            </li>
+                                            @if(auth()->user())
+                                                <form action="{{route('mark-as-inappropriate',$exp->id)}}" method="POST">
+                                                    {{@csrf_field()}}
+                                                    <li>
+                                                        <a class="bg-white hover:bg-gray-200 block transition duration-150 ease-in" onclick="$(this).closest('form').submit();">
+                                                        {{$exp->ifMarkedWrongBy(auth()->user()) ? 'Make Appropriate': 'Mark as Inappropriate'}}
+                                                        </a>
+                                                    </li>
+                                                </form>
+                                            @endif
                                             @if(auth()->user() && auth()->user()->id === $exp->user->id)
                                                 <form action="{{route('delete-experience',$exp->id)}}" method="POST">
                                                     {{@csrf_field()}}

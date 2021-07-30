@@ -27,11 +27,17 @@ class AddNewController extends Controller
     }
 
     public function askQuestion(Request $request) {
-        $request->validate([
-            'company_name'=>'required',
-            'question'=>'required | min:30',
-        ]);
-
+        $questionError=NULL;
+        if($request->input('company_name') == ''){
+            $questionError= 'Company name is reqd..:(';
+        }else if($request->input('question') == ''){
+            $questionError = 'Question is required';
+        }else if(strlen($request->input('question')) <30) {
+            $questionError= 'Description is too short..:(';
+        }
+        if($questionError!=NULL){
+            return redirect()->back()->with('qerror', $questionError);
+        }
 
         $q =  new Question();
         $q->user_id= auth()->user()->id;
