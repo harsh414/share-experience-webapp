@@ -20,6 +20,10 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('/my-involvements/questionRemove/{id}','App\Http\Controllers\IndexPageController@removeQuestion')->name('removeQuestion');
 });
 
+Route::get('/ip',function (){
+    dd(request()->ip());
+});
+
 Route::post('/mark-as-inappropriate/{id}','App\Http\Controllers\IndexPageController@markAsInappropriate')->name('mark-as-inappropriate');
 
 Route::get('/profile','App\Http\Controllers\IndexPageController@myProfile')->middleware('auth')->name('my-profile');

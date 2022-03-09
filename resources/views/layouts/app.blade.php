@@ -80,6 +80,7 @@
     <livewire:scripts/>
     </body>
     <script type="text/javascript">
+
         $(document).ready(function (){
             var url= window.location.pathname;
             var arr = url.split('/');
